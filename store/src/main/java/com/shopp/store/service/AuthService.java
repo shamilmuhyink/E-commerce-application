@@ -46,7 +46,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(regRequest.getPassword()));
         userDao.save(user);
         var jwtToken = jwtService.generateToken(user);
-        regResponse.setJwt(jwtToken);
+        regResponse.setJwtToken(jwtToken);
         return regResponse;
     }
 

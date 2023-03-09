@@ -8,6 +8,7 @@ import com.shopp.store.entity.response.RegisterResponse;
 import com.shopp.store.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,7 @@ public class AuthController {
 
     @PostMapping(path = "/register")
     public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest regRequest) throws UserAlreadyExistException {
-        RegisterResponse regResponse = authService.register(regRequest);
-        ResponseEntity<RegisterResponse> regEntity = ResponseEntity.ok(regResponse);
-        return regEntity;
+        return ResponseEntity.ok(authService.register(regRequest));
     }
 
     // Login the user
