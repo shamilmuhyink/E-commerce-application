@@ -2,11 +2,13 @@ package com.shopp.store.service;
 
 import com.shopp.store.configuration.JwtService;
 import com.shopp.store.customException.UserAlreadyExistException;
+import com.shopp.store.entity.Address;
 import com.shopp.store.entity.AppUser;
 import com.shopp.store.entity.request.AutenticationRequest;
 import com.shopp.store.entity.request.RegisterRequest;
 import com.shopp.store.entity.response.AuthenticationResponse;
 import com.shopp.store.entity.response.RegisterResponse;
+import com.shopp.store.repository.AddressRepository;
 import com.shopp.store.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -22,6 +25,8 @@ public class AuthService {
 
     @Autowired
     private AppUserRepository userDao;
+    @Autowired
+    private AddressRepository addressDao;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -40,10 +45,20 @@ public class AuthService {
         if(!user1.isEmpty()){
             throw new UserAlreadyExistException("user already exists");
         }
-        AppUser user = new AppUser();
-        user.setEmail(regRequest.getEmail());
-        user.setRole(regRequest.getRole());
-        user.setPassword(passwordEncoder.encode(regRequest.getPassword()));
+        AppUser user = AppUser.builder()
+                .firstName(regRequest.getFirstName())
+                .secondName(regRequest.getSecondName())
+                .dob(regRequest.getDob())
+                .mobileNumber(regRequest.getMobileNumber())
+                .email(regRequest.getEmail())
+                .password(passwordEncoder.encode(regRequest.getPassword()))
+                .addresses(regRequest.getAddresses())
+                .role(regRequest.getRole())
+                .accountCreated(LocalDate.now())
+                .build();
+        for(Address address: regRequest.getAddresses()){
+            addressDao.save(address);
+        }
         userDao.save(user);
         var jwtToken = jwtService.generateToken(user);
         regResponse.setJwtToken(jwtToken);
