@@ -9,10 +9,10 @@ import java.util.Set;
 
 @Entity
 @Getter @Setter
-@SequenceGenerator(name = "address_sequence", sequenceName = "address_seq", initialValue = 201)
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_sequence")
+    @SequenceGenerator(name = "address_sequence", sequenceName = "address_seq", initialValue = 201,allocationSize = 1)
     private long addressId;
     private String addressLine;
     private String city;

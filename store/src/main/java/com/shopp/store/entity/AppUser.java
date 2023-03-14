@@ -19,10 +19,11 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name = "user_sequence", sequenceName = "user_seq", initialValue = 101)
 public class AppUser implements UserDetails {
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_sequence")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_sequence")
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_seq", initialValue = 101, allocationSize = 1)
     private long userId;
     private String firstName;
     private String secondName;

@@ -4,7 +4,7 @@ import com.shopp.store.configuration.JwtService;
 import com.shopp.store.customException.UserAlreadyExistException;
 import com.shopp.store.entity.Address;
 import com.shopp.store.entity.AppUser;
-import com.shopp.store.entity.request.AutenticationRequest;
+import com.shopp.store.entity.request.AuthenticationRequest;
 import com.shopp.store.entity.request.RegisterRequest;
 import com.shopp.store.entity.response.AuthenticationResponse;
 import com.shopp.store.entity.response.RegisterResponse;
@@ -16,7 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -65,9 +64,9 @@ public class AuthService {
         return regResponse;
     }
 
-    public AuthenticationResponse authenticate(AutenticationRequest authRequest) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(),authRequest.getPassword()));
-        var user = userDao.findByEmail(authRequest.getEmail()).orElseThrow();
+    public AuthenticationResponse authenticate(AuthenticationRequest authRequest) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword()));
+        var user = userDao.findByEmail(authRequest.getUsername()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         AuthenticationResponse authResponse = new AuthenticationResponse();
         authResponse.setJwtToken(jwtToken);
