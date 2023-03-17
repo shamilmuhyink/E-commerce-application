@@ -2,6 +2,6 @@ package com.shopp.store.entity;
 
 public enum Role {
     CUSTOMER,
-    SALES_PERSON,
+    SELLER,
     SHIPPING_CLERK
 }

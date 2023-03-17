@@ -8,6 +8,7 @@ import com.shopp.store.entity.response.RegisterResponse;
 import com.shopp.store.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,4 +31,10 @@ public class AuthController {
     public ResponseEntity<AuthenticationResponse> loginAuth(@RequestBody AuthenticationRequest authRequest){
         return ResponseEntity.ok(authService.authenticate(authRequest));
     }
+
+    @GetMapping()
+    public String getHello(){
+        return "Hello";
+    }
+
 }

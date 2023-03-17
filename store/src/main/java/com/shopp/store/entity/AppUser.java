@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Set;
 
 
-@Entity
-@Table
-@Getter @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AppUser implements UserDetails {
+@Getter
+@Setter
+@Entity
+public class AppUser  implements UserDetails  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_sequence")
