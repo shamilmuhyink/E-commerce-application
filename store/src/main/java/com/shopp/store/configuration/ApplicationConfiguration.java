@@ -1,6 +1,6 @@
 package com.shopp.store.configuration;
 
-import com.shopp.store.repository.AppUserRepository;
+import com.shopp.store.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfiguration {
     @Autowired
-    private AppUserRepository repository;
+    private UserRepository repository;
 
     @Bean
     public UserDetailsService userDetailsService(){

@@ -1,7 +1,21 @@
 package com.shopp.store.customException;
 
-public class UserAlreadyExistException extends Exception {
-    public UserAlreadyExistException(String errorMessage){
-        super(errorMessage);
+public class UserAlreadyExistException extends RuntimeException {
+    public UserAlreadyExistException(){
+        super();
+    }
+    public UserAlreadyExistException(String message){
+        super(message);
+    }
+    public UserAlreadyExistException(String errorMessage, Throwable cause){
+        super(errorMessage, cause);
+    }
+    public UserAlreadyExistException(Throwable cause){
+        super(cause);
+    }
+    protected UserAlreadyExistException(String message, Throwable cause,
+                               boolean enableSuppression,
+                               boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

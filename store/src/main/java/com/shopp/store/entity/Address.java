@@ -3,15 +3,12 @@ package com.shopp.store.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_sequence")
@@ -21,6 +18,4 @@ public class Address {
     private String city;
     private String state;
     private int pinCode;
-    @ManyToMany(mappedBy = "addresses")
-    private Set<AppUser> users = new HashSet<>();
 }
