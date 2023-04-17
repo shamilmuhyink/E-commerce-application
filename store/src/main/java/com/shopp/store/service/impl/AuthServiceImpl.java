@@ -1,24 +1,18 @@
 package com.shopp.store.service.impl;
 
-import com.shopp.store.configuration.JwtService;
+import com.shopp.store.JWT.JwtService;
 import com.shopp.store.customException.UserAlreadyExistException;
 import com.shopp.store.dto.UserDTO;
-import com.shopp.store.entity.Address;
 import com.shopp.store.entity.User;
-import com.shopp.store.request.AuthenticationRequest;
 import com.shopp.store.request.RegisterRequest;
 import com.shopp.store.response.AuthenticationResponse;
-import com.shopp.store.repository.AddressRepository;
 import com.shopp.store.repository.UserRepository;
 import com.shopp.store.response.RegisterResponse;
 import com.shopp.store.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.shopp.store.configuration;
+package com.shopp.store.JWT;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

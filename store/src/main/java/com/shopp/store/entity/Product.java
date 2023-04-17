@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Builder
 @Getter
 @Setter
@@ -21,7 +23,7 @@ public class Product {
     private float price;
     private float weight;
     private String productDesc;
-    private LocalDate updateDate;
+    private LocalDateTime updateDate;
     private float stock;
     @ManyToOne
     @JoinColumn(name="categoryId", referencedColumnName = "categoryId")

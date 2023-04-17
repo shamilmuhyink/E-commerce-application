@@ -1,12 +1,9 @@
 package com.shopp.store.controller;
 
 import com.shopp.store.customException.UserAlreadyExistException;
-import com.shopp.store.request.AuthenticationRequest;
 import com.shopp.store.request.RegisterRequest;
-import com.shopp.store.response.AuthenticationResponse;
 import com.shopp.store.response.RegisterResponse;
 import com.shopp.store.service.AuthService;
-import com.shopp.store.service.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

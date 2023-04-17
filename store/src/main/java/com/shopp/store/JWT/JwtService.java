@@ -1,4 +1,4 @@
-package com.shopp.store.configuration;
+package com.shopp.store.JWT;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

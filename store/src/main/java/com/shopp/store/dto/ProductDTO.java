@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @Getter
@@ -17,7 +18,7 @@ public class ProductDTO {
     private float price;
     private float weight;
     private String productDesc;
-    private LocalDate updateDate;
+    private LocalDateTime updateDate;
     private float stock;
     private Category category;
 }

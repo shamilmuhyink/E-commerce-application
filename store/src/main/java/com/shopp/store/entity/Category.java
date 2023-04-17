@@ -17,6 +17,6 @@ public class Category {
     @SequenceGenerator(name = "category_sequence", sequenceName = "cat_seq", initialValue = 401, allocationSize = 1)
     private long categoryId;
     private String categoryName;
-    @OneToMany(mappedBy = "category")
-    private List<Product> products = new ArrayList<>();
+//    @OneToMany(mappedBy = "category")
+//    private List<Product> products = new ArrayList<>();
 }
