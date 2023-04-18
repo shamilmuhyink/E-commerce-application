@@ -1,6 +1,6 @@
 package com.shopp.store.dto;
 
-import com.shopp.store.entity.OrderItem;
+import com.shopp.store.entity.Cart;
 import com.shopp.store.entity.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,5 +18,5 @@ public class OrderDTO {
     private User user;
     private LocalDateTime orderDate;
     private float orderTotal;
-    private List<OrderItem> cart = new ArrayList<>();
+    private List<Cart> cart = new ArrayList<>();
 }

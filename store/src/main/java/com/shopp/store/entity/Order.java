@@ -17,7 +17,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "order_sequence")
-    @SequenceGenerator(name = "order_sequence", sequenceName = "product_seq", initialValue = 501, allocationSize = 1)
+    @SequenceGenerator(name = "order_sequence", sequenceName = "product_seq", initialValue = 601, allocationSize = 1)
     private long orderId;
 
     private LocalDate orderDate;

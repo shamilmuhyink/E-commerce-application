@@ -1,10 +1,8 @@
 package com.shopp.store.controller;
 
 import com.shopp.store.customException.ResourceNotFoundException;
-import com.shopp.store.customException.UserAlreadyExistException;
 import com.shopp.store.dto.ProductDTO;
 import com.shopp.store.service.ProductService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,15 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @RestController
 @RequestMapping("/product")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
-
-
 
     @PostMapping(path = "/add-product")
     @PreAuthorize("SELLER")
@@ -31,10 +26,22 @@ public class ProductController {
     public ResponseEntity<List<ProductDTO>> getProducts(){
         return ResponseEntity.ok(productService.getProducts());
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable long id){
         return ResponseEntity.ok(productService.getProductById(id));
     }
+
+    @GetMapping("search/{searchKey}")
+    public ResponseEntity<List<ProductDTO>> getProductsBySearchKey(@PathVariable String searchKey){
+        return ResponseEntity.ok(productService.getProductBySearchKey(searchKey));
+    }
+
+    @GetMapping("/sort-by-price")
+    public ResponseEntity<List<ProductDTO>> getProductsSortedByPrice(){
+        return ResponseEntity.ok(productService.getProductsSortedByPrice());
+    }
+
     @PutMapping("/update/{productId}")
     public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long productId, @RequestBody ProductDTO productRequest){
         return ResponseEntity.ok(productService.updateProduct(productId, productRequest));

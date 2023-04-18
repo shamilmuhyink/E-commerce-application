@@ -31,6 +31,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/product/**").permitAll()
 //                        .requestMatchers(HttpMethod.POST,"/product/**").hasRole("SELLER")
+                        .requestMatchers("/orderitem/**").permitAll()
+//                        .requestMatchers("/orderitem/**").hasRole("CUSTOMER")
                         .anyRequest().authenticated())
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

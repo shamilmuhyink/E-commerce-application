@@ -8,10 +8,12 @@ import com.shopp.store.repository.CategoryRepository;
 import com.shopp.store.repository.ProductRepository;
 import com.shopp.store.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -96,6 +98,48 @@ public class ProductServiceImpl implements ProductService {
                 .category(product.getCategory())
                 .build();
         return productResponse;
+    }
+
+    @Override
+    public List<ProductDTO> getProductBySearchKey(String searchKey) {
+        List<Product> products = productDAO.findByProductNameContainingIgnoreCase(searchKey);
+        List<ProductDTO> productResponseList = new LinkedList<>();
+        for(Product product: products){
+            ProductDTO productResponse = ProductDTO.builder()
+                    .category(product.getCategory())
+                    .productId(product.getProductId())
+                    .stock(product.getStock())
+                    .updateDate(product.getUpdateDate())
+                    .productDesc(product.getProductDesc())
+                    .price(product.getPrice())
+                    .productName(product.getProductName())
+                    .imageURL(product.getImageURL())
+                    .weight(product.getWeight())
+                    .build();
+            productResponseList.add(productResponse);
+        }
+        return productResponseList;
+    }
+
+    @Override
+    public List<ProductDTO> getProductsSortedByPrice() {
+        List<Product> products = productDAO.findAll(Sort.by("price"));
+        List<ProductDTO> productResponseList = new LinkedList<>();
+        for(Product product: products){
+            ProductDTO productResponse = ProductDTO.builder()
+                    .category(product.getCategory())
+                    .productId(product.getProductId())
+                    .stock(product.getStock())
+                    .updateDate(product.getUpdateDate())
+                    .productDesc(product.getProductDesc())
+                    .price(product.getPrice())
+                    .productName(product.getProductName())
+                    .imageURL(product.getImageURL())
+                    .weight(product.getWeight())
+                    .build();
+            productResponseList.add(productResponse);
+        }
+        return productResponseList;
     }
 
     @Override
