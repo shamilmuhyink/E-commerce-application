@@ -42,6 +42,9 @@ public class User  implements UserDetails  {
     private Role role;
     private LocalDateTime accountCreated;
 
+//    @OneToMany(mappedBy = "customer")
+//    private List<Cart> carts;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

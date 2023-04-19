@@ -1,31 +1,35 @@
 package com.shopp.store.controller;
 
-import com.shopp.store.dto.cartDTO;
+import com.shopp.store.dto.CartDTO;
+import com.shopp.store.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/orderitem")
+@RequestMapping(path="/cart")
 public class CartController {
+    @Autowired
+    private CartService cartService;
 
     @PostMapping(path="/add-to-cart")
-    public ResponseEntity<cartDTO> addToCart(@RequestBody cartDTO cartRequest){
+    public ResponseEntity<CartDTO> addToCart(@RequestBody CartDTO cartRequest){
+        return ResponseEntity.ok(cartService.addToCart(cartRequest));
+    }
+
+    @GetMapping(path="/get-cart-items")
+    public ResponseEntity<List<CartDTO>> getCartItems(){
         return null;
     }
 
-    @GetMapping(path="/get-orderitems")
-    public ResponseEntity<List<cartDTO>> getCartItems(){
-        return null;
+    @PutMapping("/update-cart-item/{id}")
+    public ResponseEntity<CartDTO> updateCart(@PathVariable long itemId, @RequestBody CartDTO cartRequest){
+        return ResponseEntity.ok(cartService.updateCartItem(itemId,cartRequest));
     }
 
-    @PutMapping("/update-item/{id}")
-    public ResponseEntity<cartDTO> updateCart(@PathVariable long itemId, @RequestBody cartDTO cartRequest){
-        return null;
-    }
-
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete-cart-item/{id}")
     public ResponseEntity<String> removeItem(@PathVariable long itemId){
         return null;
     }

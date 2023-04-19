@@ -27,38 +27,46 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO addProduct(ProductDTO productRequest){
 
-        Product product = Product.builder()
-                .stock(productRequest.getStock())
-                .productDesc(productRequest.getProductDesc())
-                .productName(productRequest.getProductName())
-                .price(productRequest.getPrice())
-                .imageURL(productRequest.getImageURL())
-                .weight(productRequest.getWeight())
-                .updateDate(LocalDateTime.now())
-                .build();
-
-        Category category = categoryDAO.findByCategoryName(productRequest.getCategory().getCategoryName());
-        if(category == null){
-            category = productRequest.getCategory();
-            categoryDAO.save(category);
+        // IF product exist in Inventory then update it
+        Product product = productDAO.findByProductName(productRequest.getProductName());
+        if(product != null){
+            ProductDTO productResponse = updateProduct(product.getProductId(),productRequest);
+            return productResponse;
         }
+        else {
+            product = Product.builder()
+                    .stock(productRequest.getStock())
+                    .productDesc(productRequest.getProductDesc())
+                    .productName(productRequest.getProductName())
+                    .price(productRequest.getPrice())
+                    .imageURL(productRequest.getImageURL())
+                    .weight(productRequest.getWeight())
+                    .updateDate(LocalDateTime.now())
+                    .build();
 
-        product.setCategory(category);
-        product = productDAO.save(product);
+            Category category = categoryDAO.findByCategoryName(productRequest.getCategory().getCategoryName());
+            if(category == null){
+                category = productRequest.getCategory();
+                categoryDAO.save(category);
+            }
 
-        ProductDTO productResponse = ProductDTO.builder()
-                .productDesc(product.getProductDesc())
-                .productName(product.getProductName())
-                .productId(product.getProductId())
-                .price(product.getPrice())
-                .weight(product.getWeight())
-                .stock(product.getStock())
-                .imageURL(product.getImageURL())
-                .updateDate(product.getUpdateDate())
-                .category(product.getCategory())
-                .build();
+            product.setCategory(category);
+            product = productDAO.save(product);
 
-        return productResponse;
+            ProductDTO productResponse = ProductDTO.builder()
+                    .productDesc(product.getProductDesc())
+                    .productName(product.getProductName())
+                    .productId(product.getProductId())
+                    .price(product.getPrice())
+                    .weight(product.getWeight())
+                    .stock(product.getStock())
+                    .imageURL(product.getImageURL())
+                    .updateDate(product.getUpdateDate())
+                    .category(product.getCategory())
+                    .build();
+
+            return productResponse;
+        }
     }
 
     @Override
@@ -154,7 +162,7 @@ public class ProductServiceImpl implements ProductService {
                 .weight(productRequest.getWeight())
                 .productDesc(productRequest.getProductDesc())
                 .updateDate(LocalDateTime.now())
-                .stock(productRequest.getStock())
+                .stock(product.getStock()+productRequest.getStock())
                 .category(product.getCategory())
                 .build();
 

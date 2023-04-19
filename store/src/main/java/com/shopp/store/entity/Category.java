@@ -3,8 +3,6 @@ package com.shopp.store.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
