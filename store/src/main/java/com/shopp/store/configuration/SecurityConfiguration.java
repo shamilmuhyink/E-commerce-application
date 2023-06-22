@@ -20,8 +20,9 @@ public class SecurityConfiguration {
     private JwtAuthenticationFilter jwtAuthFilter;
     @Autowired
     private AuthenticationProvider authenticationProvider;
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
+    SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
                 .cors()
                 .and()
@@ -29,8 +30,8 @@ public class SecurityConfiguration {
                 .disable()
                 .authorizeHttpRequests((authz)-> authz
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/product/**").permitAll()
-//                        .requestMatchers(HttpMethod.POST,"/product/**").hasRole("SELLER")
+                        .requestMatchers(HttpMethod.GET,"/product/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/product/**").hasRole("SELLER")
 //                        .requestMatchers("/cart/**").permitAll()
 //                        .requestMatchers("/cart/**").hasRole("CUSTOMER")
                         .anyRequest().authenticated())

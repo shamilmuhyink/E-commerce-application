@@ -22,7 +22,7 @@ public class ProductController {
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productRequest){
         return ResponseEntity.ok(productService.addProduct(productRequest));
     }
-    @GetMapping(path= "/list-products")
+    @GetMapping(path= "/view-products")
     public ResponseEntity<List<ProductDTO>> getProducts(){
         return ResponseEntity.ok(productService.getProducts());
     }

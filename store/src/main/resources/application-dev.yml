@@ -1,0 +1,34 @@
+spring:
+#JDBC
+  datasource:
+    url: jdbc:mysql://localhost:3306/shoppDB
+    username: root
+    password: root
+    
+#JPA
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8InnoDBDialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        '[globally_quoted_identifiers]': true
+        dialect: org.hibernate.dialect.MySQLDialect
+        format-sql: true
+        
+#Port
+server:
+  port: 8080
+  
+
+#Security-Logging
+logging:
+  level:
+    '[org.springframework.security]': DEBUG
+
+#Log4j logging
+    root: INFO
+    web: DEBUG
+#    pattern.console: %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight{%-5level} [%t] %logger{36} - %msg%n
