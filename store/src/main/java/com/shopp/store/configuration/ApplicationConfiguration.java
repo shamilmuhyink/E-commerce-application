@@ -1,6 +1,7 @@
 package com.shopp.store.configuration;
 
 import com.shopp.store.repository.UserRepository;
+import com.shopp.store.util.PaymentUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,5 +43,10 @@ public class ApplicationConfiguration {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public PaymentUtil paymentUtil(){
+        return new PaymentUtil();
     }
 }

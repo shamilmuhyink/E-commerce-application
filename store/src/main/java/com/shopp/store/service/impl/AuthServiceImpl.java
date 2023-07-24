@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
         //User existingUser = userDAO.findByEmail(registerRequest.getEmail()).orElseThrow(() -> new UserAlreadyExistException("user Exist"));
         Optional<User> existingUser = userDAO.findByEmail(registerRequest.getEmail());
         if(existingUser.isPresent()){
-            throw new UserAlreadyExistException("user Already Exist");
+            throw new UserAlreadyExistException("Please try login, user already exist.");
         }
         else{
             // Map registerRequest body to user instance

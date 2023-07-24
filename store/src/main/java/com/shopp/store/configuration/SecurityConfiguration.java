@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authz)-> authz
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/product/**").permitAll()
+                        .requestMatchers("/payment/**").permitAll()
 //                        .requestMatchers(HttpMethod.POST,"/product/**").hasRole("SELLER")
 //                        .requestMatchers("/cart/**").permitAll()
 //                        .requestMatchers("/cart/**").hasRole("CUSTOMER")
